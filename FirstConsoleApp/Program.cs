@@ -6,13 +6,12 @@ namespace FirstConsoleApp
     {
         static void Main(string[] args)
         {
-            int myInt;
-            //Console.WriteLine(" myInt: {0}", myInt); 
-            myInt = 50_00_000;
-            Console.WriteLine(" myInt: {0}", myInt);
-            Console.WriteLine("Hello World!");
-            var vehicle = new Vehicle("Toyota", "Auris", 2012);
-            Console.WriteLine($"My Vehicle: {vehicle}");
+            UnitConverter feetToInchesConverter = new UnitConverter(12);
+            UnitConverter milesToFeetConverter = new UnitConverter(5280);
+
+            Console.WriteLine(feetToInchesConverter.Convert(30));
+            Console.WriteLine(feetToInchesConverter.Convert(100));
+            Console.WriteLine(feetToInchesConverter.Convert(milesToFeetConverter.Convert(2)));
         }
     }
 
@@ -32,6 +31,18 @@ namespace FirstConsoleApp
         public override string ToString()
         {
             return $"{Make} {Model} {Year}";
+        }
+    }
+
+    class UnitConverter
+    {
+        int ratio;
+        public UnitConverter (int unitRatio) {
+            ratio = unitRatio;
+        }
+
+        public int Convert (int unit) {
+            return unit* ratio;
         }
     }
 }
